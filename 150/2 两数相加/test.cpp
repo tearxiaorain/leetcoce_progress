@@ -25,6 +25,13 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+    void add(int x)
+    {
+        ListNode *t=this;
+        while(t->next!=nullptr)
+        t=t->next;
+        t->next=new ListNode(x,nullptr);
+    }
 };
 
 ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
@@ -60,6 +67,19 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
         l1 = l1->next;
         l2 = l2->next;
     }
+    while (l1)
+    {
+        if (l1->val >= 10)
+        {
+            if (l1->next == nullptr)
+            {
+                l1->next = new ListNode();
+            }
+            l1->next->val += l1->val / 10;
+            l1->val %= 10;
+        }
+        l1 = l1->next;
+    }
     return h1;
 }
 
@@ -67,6 +87,18 @@ int main()
 {
     ListNode *l1 = new ListNode(0);
     ListNode *l2 = new ListNode(0);
+    int arr[10]={9,9,9,9,9,9,9};
+    int brr[10]={9,9,9,9};
+    for(int i=0;i<7;i++)
+    {
+        l1->add(arr[i]);
+        //l2->add(brr[i]);
+    }
+    for(int i=0;i<4;i++)
+    {
+        //l1->add(arr[i]);
+        l2->add(brr[i]);
+    }
     ListNode *l3;
     l3 = addTwoNumbers(l1, l2);
     cout << l3->val;
