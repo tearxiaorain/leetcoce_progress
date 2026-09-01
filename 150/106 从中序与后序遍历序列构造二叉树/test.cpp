@@ -31,15 +31,16 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
+TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
 {
-    if (!preorder.size())
+    if (!postorder.size())
         return nullptr;
-    TreeNode *root = new TreeNode(preorder[0]);
-    int vr = preorder[0];
-    vector<int> lpre;
+    int l = postorder.size();
+    TreeNode *root = new TreeNode(postorder[l - 1]);
+    int vr = postorder[l - 1];
+    vector<int> lpost;
     vector<int> lin;
-    vector<int> rpre;
+    vector<int> rpost;
     vector<int> rin;
     int root_index = 0;
     for (int i = 0; i < inorder.size(); i++)
@@ -49,16 +50,16 @@ TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
             root_index = i;
             break;
         }
-        lpre.push_back(preorder[i + 1]);
+        lpost.push_back(postorder[i]);
         lin.push_back(inorder[i]);
     }
     for (int i = root_index + 1; i < inorder.size(); i++)
     {
-        rpre.push_back(preorder[i]);
+        rpost.push_back(postorder[i - 1]);
         rin.push_back(inorder[i]);
     }
-    root->left = buildTree(lpre, lin);
-    root->right = buildTree(rpre, rin);
+    root->left = buildTree(lin, lpost);
+    root->right = buildTree(rin, rpost);
     return root;
 }
 
