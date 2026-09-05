@@ -18,32 +18,32 @@ using namespace std;
  * };
  */
 
-struct ListNode
+struct myListNode
 {
     int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    myListNode *next;
+    myListNode() : val(0), next(nullptr) {}
+    myListNode(int x) : val(x), next(nullptr) {}
+    myListNode(int x, myListNode *next) : val(x), next(next) {}
     void add(int x)
     {
-        ListNode *t = this;
+        myListNode *t = this;
         while (t->next != nullptr)
             t = t->next;
-        t->next = new ListNode(x, nullptr);
+        t->next = new myListNode(x, nullptr);
     }
 };
 
-ListNode* reverseBetween1(ListNode* head, int left, int right) {
+myListNode* reverseBetween1(myListNode* head, int left, int right) {
     stack<int> st;
-    ListNode* l=head;
+    myListNode* l=head;
     int count=1;
     while(count<left)
     {
         l=l->next;
         count++;
     }
-    ListNode* t=l;
+    myListNode* t=l;
     for(int i=left;i<=right;i++)
     {
         st.push(t->val);
@@ -58,10 +58,10 @@ ListNode* reverseBetween1(ListNode* head, int left, int right) {
     return head;
 }
 
-ListNode* reverseBetween(ListNode* head, int left, int right) {
+myListNode* reverseBetween(myListNode* head, int left, int right) {
     // 使用 dummy 节点统一处理 left==1 的情况
-    ListNode* dummy = new ListNode(0, head);
-    ListNode* pre = dummy;
+    myListNode* dummy = new myListNode(0, head);
+    myListNode* pre = dummy;
 
     // pre 走到 left 的前一个节点
     for (int i = 1; i < left; i++) {
@@ -69,13 +69,13 @@ ListNode* reverseBetween(ListNode* head, int left, int right) {
     }
 
     // current 指向 left 节点
-    ListNode* current = pre->next;
-    ListNode* h = current;          // h 记录反转后的尾节点（原 left 节点）
-    ListNode* prev = nullptr;
+    myListNode* current = pre->next;
+    myListNode* h = current;          // h 记录反转后的尾节点（原 left 节点）
+    myListNode* prev = nullptr;
 
     // 反转 left 到 right 的节点（共 right-left+1 个）
     for (int i = left; i <= right; i++) {
-        ListNode* next_t = current->next;
+        myListNode* next_t = current->next;
         current->next = prev;
         prev = current;
         current = next_t;
@@ -85,15 +85,15 @@ ListNode* reverseBetween(ListNode* head, int left, int right) {
     pre->next = prev;
     h->next = current;
 
-    ListNode* newHead = dummy->next;
+    myListNode* newHead = dummy->next;
     delete dummy;
     return newHead;
 }
 
 int main()
 {
-    ListNode *l1 = new ListNode(5);
-    ListNode *l2 = new ListNode(0);
+    myListNode *l1 = new myListNode(5);
+    myListNode *l2 = new myListNode(0);
     int arr[10] = {1,2,3,4,5, 9, 9};
     int brr[10] = {1,3,4, 9};
     for (int i = 1; i < 2; i++)
@@ -106,7 +106,7 @@ int main()
     //     // l1->add(arr[i]);
     //     l2->add(brr[i]);
     // }
-    ListNode *l3;
+    myListNode *l3;
     l3 = reverseBetween(l1, 1,2);
     cout << l3->val;
     return 0;

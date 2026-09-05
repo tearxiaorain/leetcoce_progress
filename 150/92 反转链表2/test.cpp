@@ -18,32 +18,32 @@ using namespace std;
  * };
  */
 
-struct ListNode
+struct myListNode
 {
     int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    myListNode *next;
+    myListNode() : val(0), next(nullptr) {}
+    myListNode(int x) : val(x), next(nullptr) {}
+    myListNode(int x, myListNode *next) : val(x), next(next) {}
     void add(int x)
     {
-        ListNode *t = this;
+        myListNode *t = this;
         while (t->next != nullptr)
             t = t->next;
-        t->next = new ListNode(x, nullptr);
+        t->next = new myListNode(x, nullptr);
     }
 };
 
-ListNode* reverseBetween(ListNode* head, int left, int right) {
+myListNode* reverseBetween(myListNode* head, int left, int right) {
     stack<int> st;
-    ListNode* l=head;
+    myListNode* l=head;
     int count=1;
     while(count<left)
     {
         l=l->next;
         count++;
     }
-    ListNode* t=l;
+    myListNode* t=l;
     for(int i=left;i<=right;i++)
     {
         st.push(t->val);
@@ -60,8 +60,8 @@ ListNode* reverseBetween(ListNode* head, int left, int right) {
 
 int main()
 {
-    ListNode *l1 = new ListNode(5);
-    ListNode *l2 = new ListNode(0);
+    myListNode *l1 = new myListNode(5);
+    myListNode *l2 = new myListNode(0);
     int arr[10] = {1,2,3,4,5, 9, 9};
     int brr[10] = {1,3,4, 9};
     for (int i = 1; i < 2; i++)
@@ -74,7 +74,7 @@ int main()
     //     // l1->add(arr[i]);
     //     l2->add(brr[i]);
     // }
-    ListNode *l3;
+    myListNode *l3;
     l3 = reverseBetween(l1, 1,2);
     cout << l3->val;
     return 0;

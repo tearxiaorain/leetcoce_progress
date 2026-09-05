@@ -16,18 +16,18 @@ using namespace std;
  * };
  */
 
-struct ListNode {
+struct myListNode {
     int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    myListNode *next;
+    myListNode(int x) : val(x), next(NULL) {}
 };
 class Solution {
 public:
-    bool hasCycle(ListNode *head) {
-        ListNode * n1=head;
+    bool hasCycle(myListNode *head) {
+        myListNode * n1=head;
         if(n1==nullptr)
             return false;
-        ListNode * n2=head->next;
+        myListNode * n2=head->next;
         if(n2==nullptr)
             return false;
         while(n1!=nullptr&&n2!=nullptr)

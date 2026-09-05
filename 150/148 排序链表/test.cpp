@@ -20,16 +20,16 @@ using namespace std;
  * };
  */
 
-struct ListNode
+struct myListNode
 {
     int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    myListNode *next;
+    myListNode() : val(0), next(nullptr) {}
+    myListNode(int x) : val(x), next(nullptr) {}
+    myListNode(int x, myListNode *next) : val(x), next(next) {}
 };
 
-ListNode *sortList(ListNode *head)
+myListNode *sortList(myListNode *head)
 {
     if (!head)
         return head;
@@ -37,8 +37,8 @@ ListNode *sortList(ListNode *head)
         return head;
     if (head->next->next == nullptr)
     {
-        ListNode *h = new ListNode(head->val);
-        ListNode *hh = new ListNode(head->next->val);
+        myListNode *h = new myListNode(head->val);
+        myListNode *hh = new myListNode(head->next->val);
         if (h->val > hh->val)
         {
             hh->next = h;
@@ -51,8 +51,8 @@ ListNode *sortList(ListNode *head)
         }
     }
 
-    ListNode *l = head;
-    ListNode *r = head;
+    myListNode *l = head;
+    myListNode *r = head;
     while (r->next)
     {
         l = l->next;
@@ -63,23 +63,23 @@ ListNode *sortList(ListNode *head)
     r = l->next;
     l->next=nullptr;
     l = head;
-    ListNode *ll = sortList(l);
-    ListNode *rr = sortList(r);
+    myListNode *ll = sortList(l);
+    myListNode *rr = sortList(r);
 
-    ListNode *h;
+    myListNode *h;
     l=ll;
     r=rr;
     if (l->val > r->val)
     {
-        h = new ListNode(r->val);
+        h = new myListNode(r->val);
         r = r->next;
     }
     else
     {
-        h = new ListNode(l->val);
+        h = new myListNode(l->val);
         l = l->next;
     }
-    ListNode *res = h;
+    myListNode *res = h;
     while (l && r)
     {
         if (l->val < r->val)
@@ -106,16 +106,16 @@ int main()
 {
     int arr[5] = {-1,5,3,4,0};
     //vector<int> a;
-    ListNode *h=new ListNode(arr[0]);
-    ListNode *hh = h;
+    myListNode *h=new myListNode(arr[0]);
+    myListNode *hh = h;
 
     for (int i = 1; i < 5; i++)
     {
         //a.push_back(arr[i]);
-        hh->next = new ListNode(arr[i]);
+        hh->next = new myListNode(arr[i]);
         hh=hh->next;
     }
-    ListNode *r = sortList(h);
+    myListNode *r = sortList(h);
     cout << 1;
     return 0;
 }

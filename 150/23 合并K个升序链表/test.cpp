@@ -20,21 +20,21 @@ using namespace std;
  * };
  */
 
-struct ListNode
+struct myListNode
 {
     int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    myListNode *next;
+    myListNode() : val(0), next(nullptr) {}
+    myListNode(int x) : val(x), next(nullptr) {}
+    myListNode(int x, myListNode *next) : val(x), next(next) {}
 };
 
-ListNode *merge(ListNode *&l1, ListNode *&l2)
+myListNode *merge(myListNode *&l1, myListNode *&l2)
 {
-    ListNode *res = new ListNode(0);
-    ListNode *t = res;
-    ListNode *l = l1;
-    ListNode *r = l2;
+    myListNode *res = new myListNode(0);
+    myListNode *t = res;
+    myListNode *l = l1;
+    myListNode *r = l2;
     while (l && r)
     {
         if (l->val < r->val)
@@ -56,7 +56,7 @@ ListNode *merge(ListNode *&l1, ListNode *&l2)
     return t->next;
 }
 
-ListNode *mergeKLists(vector<ListNode *> &lists)
+myListNode *mergeKLists(vector<myListNode *> &lists)
 {
     int n = lists.size();
     if (n == 0)
@@ -65,8 +65,8 @@ ListNode *mergeKLists(vector<ListNode *> &lists)
         return lists[0];
     if (n == 2)
         return merge(lists[0], lists[1]);
-    vector<ListNode *> m1;
-    vector<ListNode *> m2;
+    vector<myListNode *> m1;
+    vector<myListNode *> m2;
     for (int i = 0; i < n / 2; i++)
     {
         m1.push_back(lists[i]);
@@ -74,8 +74,8 @@ ListNode *mergeKLists(vector<ListNode *> &lists)
     }
     if (n % 2)
         m1.push_back(lists[n - 1]);
-    ListNode *r1 = mergeKLists(m1);
-    ListNode *r2 = mergeKLists(m2);
+    myListNode *r1 = mergeKLists(m1);
+    myListNode *r2 = mergeKLists(m2);
     return merge(r1, r2);
 }
 
