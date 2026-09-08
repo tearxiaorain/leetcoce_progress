@@ -11,10 +11,9 @@ using namespace std;
 
 struct TrieTreeNode
 {
-    vector<int> flag;
     vector<TrieTreeNode *> next;
     bool isWord;
-    TrieTreeNode() : flag(26, 0), next(26, nullptr), isWord(false) {}
+    TrieTreeNode() : next(26, nullptr), isWord(false) {}
 };
 
 class WordDictionary

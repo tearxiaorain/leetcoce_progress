@@ -22,7 +22,7 @@ public:
     }
 };
 
-vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+vector<vector<int>> kSmallestPairs1(vector<int>& nums1, vector<int>& nums2, int k) {
     priority_queue <val_pair,vector<val_pair>,val_pair> pq;
     int n1=nums1.size();
     int n2=nums2.size();
@@ -44,6 +44,36 @@ vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k
         tt.push_back(t.p.second);
         pq.pop();
         res.push_back(tt);
+    }
+    return res;
+}
+
+vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+    priority_queue <val_pair,vector<val_pair>,val_pair> pq;
+    int n1=nums1.size();
+    int n2=nums2.size();
+    for(int i=0;i<n1;i++)
+    {
+        int v=nums1[i]+nums2[0];
+        val_pair t(v,i,0);
+        pq.push(t);
+    }
+    
+    vector<vector<int>> res;
+    for(int i=0;i<k;i++)
+    {
+        val_pair t=pq.top();
+        vector<int> tt;
+        tt.push_back(nums1[t.p.first]);
+        tt.push_back(nums2[t.p.second]);
+        pq.pop();
+        res.push_back(tt);
+        if(t.p.second+1<n2)
+        {
+            int v=nums1[t.p.first]+nums2[t.p.second+1];
+            val_pair ttt(v,t.p.first,t.p.second+1);
+            pq.push(ttt);
+        }
     }
     return res;
 }
