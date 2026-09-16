@@ -12,7 +12,8 @@ using namespace std;
 // 超内存
 
 // 连接图 访问标记 路径标记查环 当前节点 环标记
-void dfs(vector<vector<int>> graph, vector<int> &flag, vector<int> &pathf, int c, int &f)
+// graph用&过了  不用就超内存
+void dfs(vector<vector<int>>& graph, vector<int> &flag, vector<int> &pathf, int c, int &f)
 {
     if (f)
         return;
